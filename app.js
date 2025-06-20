@@ -94,9 +94,9 @@ app.use((err, req, res, next) => {
     // res.status(statusCode).send(message);
 })
 
-// app.all("*", (req, res, next) => {
-//     next(new ExpressError(404, "page not found"));
-// })
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "page not found"));
+})
 
 app.listen(8080, () => {
     console.log("server is listening to port 8080");
