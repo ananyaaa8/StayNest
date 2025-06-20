@@ -1,59 +1,230 @@
 <style>
-  .btn-search{
+  .searchBtn {
     background-color: rgb(220, 231, 230);
     color: rgb(9, 0, 0);
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s ease;
   }
 
-  .btn-search:hover{
+  .searchBtn:hover {
     background-color: rgb(23, 82, 76);
     color: white;
+    transform: translateY(-1px);
   }
 
-  .btn-search i{
+  .searchBtn i {
     display: inline;
     margin-right: 0.5rem;
-
   }
 
-  .search-inp{
+  .search-input {
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #e2e8f0;
+  }
+
+  .search-input:focus {
+    border-color: rgb(23, 82, 76);
+    box-shadow: 0 0 0 0.2rem rgba(42, 67, 101, 0.1);
+  }
+
+  /* Improved mobile menu */
+  #sideMenu .offcanvas-header {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1rem;
+  }
+
+  #sideMenu .offcanvas-title {
+    color: rgb(23, 82, 76);
+    font-weight: 700;
+  }
+
+  #sideMenu .nav-link {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #f7f7f7;
+    color: rgb(23, 82, 76);
+    font-weight: 500;
+  }
+
+  #sideMenu .nav-link:hover {
+    background-color: #f7fafc;
+    color:rgb(23, 82, 76);
+  }
+
+  /* Search drawer improvements */
+  #searchDrawer .offcanvas-body {
+    padding: 1rem 2rem;
+  }
+
+  /* Auth link styles */
+  .auth-link {
+    color: rgb(23, 82, 76) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.8rem;
+    text-decoration: none;
+  }
+
+  .auth-link:hover {
+    color: rgb(23, 82, 76) !important;
+    transform: translateY(-1px);
+  }
+
+  .host-link {
+    color: rgb(23, 82, 76) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .host-link:hover {
+    color: rgb(23, 82, 76) !important;
+    text-decoration: underline;
+  }
+
+  /* Mobile Auth Buttons */
+  .mobile-auth-btn {
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+  }
+
+  .mobile-login-btn {
+    background-color: transparent;
+    color:rgb(23, 82, 76)!important;
+    border: 1px solid rgb(23, 82, 76);
+  }
+
+  .mobile-signup-btn {
+    background-color: rgb(23, 82, 76);
+    color: white !important;
+    border: none;
+  }
+
+  .mobile-login-btn:hover {
+    background-color: #f7fafc;
+  }
+
+  .mobile-signup-btn:hover {
+    background-color: rgb(23, 82, 76);
+  }
+
+  .title{
+    color:black;
+    font-size: 1.5rem;
+    font-weight: bolder;
   }
 </style>
 
-
-
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<!-- Top Navbar -->
+<nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top mb-2">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
+    <!-- Logo (House icon) - visible only on large screens -->
+    <a class="navbar-brand d-none d-lg-block" href="/listings">
+      <i class="fa-solid fa-compass"></i>
+    </a>
+
+    <!-- Left toggle button for offcanvas menu -->
+    <button class="navbar-toggler d-block d-lg-none border-0" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#sideMenu">
+      <i class="fa-solid fa-bars" style="color: rgb(23, 82, 76)"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-      </div>
-      <div class="navbar-nav ms-auto">
+
+    <!-- Right toggle for search (only visible on small and md screens) -->
+    <button class="btn d-block d-lg-none ms-auto search" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#searchDrawer">
+      <i class="fa-solid fa-magnifying-glass" style="color: rgb(23, 82, 76)"></i>
+    </button>
+
+    <!-- Full Navbar for lg+ -->
+    <div class="collapse navbar-collapse">
+      <!-- Left: Explore -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">Explore</a>
+        </li>
+      </ul>
+
+      <!-- Center: Search -->
+      <div class="mx-auto" style="max-width: 400px; width: 100%;">
         <form class="d-flex" role="search">
-          <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations">
-          <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          <input class="form-control me-2 search-input" type="search" placeholder="Search destinations"
+            aria-label="Search">
+          <button class="btn searchBtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
         </form>
       </div>
 
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">StayNest your home</a>
-        <% if(!currUser) { %>
-          <a class="nav-link" href="/signup"><b>Signup</b></a>
-          <a class="nav-link" href="/login"><b>Login</b></a>
+      <!-- Right: Auth Links -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link host-link" href="/listings/new">List your property</a>
+        </li>
+        <% if (!currUser) { %>
+          <li class="nav-item"><a class="nav-link auth-link" href="/login">Log in</a></li>
+          <li class="nav-item"><a class="nav-link auth-link" href="/signup">Sign up</a></li>
           <% } %>
-
-            <% if(currUser) { %>
-              <a class="nav-link" href="/logout">Logout</a>
+            <% if (currUser) { %>
+              <li class="nav-item"><a class="nav-link auth-link" href="/logout">Log out</a></li>
               <% } %>
-      </div>
+      </ul>
     </div>
   </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="sideMenu">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <!-- House icon - only visible on small/medium screens -->
+    <a class="d-flex align-items-center p-3 border-bottom" href="/listings" style="text-decoration: none;">
+      <i class="fa-solid fa-compass me-2 "></i> 
+      <span class="title">StayNest</span>
+      <span class="fw-bold" style="color: rgb(23, 82, 76);"></span>
+    </a>
+
+    <a class="d-block nav-link" href="/listings">
+      <i class="fa-solid fa-house-chimney me-2" style="color: rgb(48, 92, 88);"></i>Explore
+    </a>
+    <a class="d-block nav-link" href="/listings/new">
+      <i class="fa-solid fa-plus me-2"></i>List your property
+    </a>
+
+    <div class="p-3">
+      <% if (!currUser) { %>
+        <a class="mobile-auth-btn mobile-login-btn mb-2" href="/login">Log in</a>
+        <a class="mobile-auth-btn mobile-signup-btn" href="/signup">Sign up</a>
+        <% } %>
+          <% if (currUser) { %>
+            <a class="mobile-auth-btn mobile-login-btn" href="/logout">Log out</a>
+            <% } %>
+    </div>
+  </div>
+</div>
+
+<!-- Search Drawer -->
+<div class="offcanvas offcanvas-top d-lg-none" tabindex="-1" id="searchDrawer">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" aria-label="Search">
+      <button class="btn searchBtn" type="submit">
+        <span class="btn searchBtn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <span class="btn searchBtn">
+          Search
+        </span></button>
+    </form>
+  </div>
+</div>
